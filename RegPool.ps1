@@ -39,7 +39,7 @@ $csExUM=Get-CsExUmContact -Filter {RegistrarPool -eq $getRegistrarPool} | Select
 $csDialInConf=Get-CsDialInConferencingAccessNumber -Filter {Pool -eq $getRegistrarPool} | Select-Object PrimaryUri | out-string -stream
 $csTrustedAppEnd=Get-CsTrustedApplicationEndpoint -Filter {RegistrarPool -eq $getRegistrarPool} | Select-Object SipAddress | out-string -stream
 $csRGS=Get-CsRgsWorkflow | Where-Object {$_.OwnerPool -eq $getRegistrarPool} | Select-Object PrimaryUri | out-string -stream
-
+$csMeetingRoom=Get-CsMeetingRoom -Filter {RegistrarPool -eq $getRegistrarPool} | Select-Object SipAddress | out-string -stream
 
 
  
@@ -50,3 +50,4 @@ if ($csExUM -ne $null){ListContents -Heading "Exchange UM Contact" -list $csExUM
 if ($csDialInConf -ne $null){ListContents -Heading "Dial-in Conference Numbers" -list $csDialInConf}
 if ($csTrustedAppEnd -ne $null){ListContents -Heading "Trusted Application Endpoints" -list $csTrustedAppEnd}
 if ($csRGS -ne $null){ListContents -Heading "Response Group Workflows" -list $csRGS}
+if ($csMeetingRoom -ne $null){ListContents -Heading "Sip Enabled Meeting Rooms" -list $csMeetingRoom}
